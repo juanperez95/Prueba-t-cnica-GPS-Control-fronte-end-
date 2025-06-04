@@ -1,0 +1,36 @@
+/* Emplear tawillcss para estilizar el frontend */
+@import 'tailwindcss';
+
+/*Se carga fuente de manera local para no tener dependencias de CDN*/
+@font-face { 
+  font-family: 'Montserrat';
+  src: url('fonts/Montserrat-Regular.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap; /* Mejora la renderización */
+}
+
+
+body{
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/* color de la fuente */
+.color-text{
+  color: #00249C;
+}
+
+/* color de enlaces */
+.color-link{
+  color: #40CEE4;
+  cursor: pointer;
+}
+
+/* estilos de los inputs */
+.entrada{
+  border: 1px solid gray;
+  border-radius: 15px;
+  padding: 10px;
+  width: 100%;
+}
