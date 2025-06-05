@@ -1,9 +1,9 @@
 <template>
     <div>
     <!-- Formulario para interactuar con la API -->
-        <form class="flex flex-col gap-1 p-4 ml-10 border-2 border-gray-300 rounded-xl shadow-xl" @submit.prevent="enviarDatos">
+        <form class="flex flex-col gap-1 p-4 ml-10 border-2 border-[#C5C5C5] rounded-xl shadow-xl" @submit.prevent="enviarDatos">
             <!-- icono de crear -->
-            <span><img src="../assets/Icon_crear.svg" alt="crear" class="size-6" @click="()=>{datosTabla.dinamica=!datosTabla.dinamica;crear=!crear}"></span>
+            <span><img src="../assets/Icon_crear.svg" alt="crear" class="size-6" @click="()=>{datosTabla.dinamica=!datosTabla.dinamica;datosTabla.crear=!datosTabla.crear;datosTabla.actualizar=false}"></span>
             <!-- campos de entrada -->
             <article class="p-5 flex gap-5 flex-row">
                 <span>
@@ -29,16 +29,16 @@
                 <input type="text" name="aspirante" id="aspirante" class="entrada" placeholder="Aspirante" v-model="datosTabla.datosForm.aspirante" :disabled="!datosTabla.dinamica">
             </article>
             <!-- boton de crear cuando se pulsa el icono de + -->
-            <article class="flex flex-row gap-5 justify-center items-center" v-show="crear">
+            <article class="flex flex-row gap-5 justify-center items-center" v-show="datosTabla.crear">
                 <!-- aldar click en el boton de cancelar se ocultan los botones -->
-                <Boton mensaje="Cancelar" color="#E280BE" tipo="button" @funcion_btn="()=>{datosTabla.dinamica=!datosTabla.dinamica;crear=!crear}"/>
+                <Boton mensaje="Cancelar" color="#E280BE" tipo="button" @funcion_btn="()=>{datosTabla.dinamica=!datosTabla.dinamica;datosTabla.crear=!datosTabla.crear}"/>
                 <Boton mensaje="Crear" color="#00249C" tipo="submit"/>
             </article>
 
             <!-- botones de actualizar y eliminar -->
             <article class="flex flex-row gap-5 justify-end items-center mr-5" v-show="datosTabla.actualizar">
+                <span><img src="../assets/Icon_cancelar.svg" alt="confirmar" class="size-8 cursor-pointer" @click="()=>{datosTabla.actualizar=false;datosTabla.dinamica=false;datosTabla.actualizar_eliminar=false}"></span>
                 <span><img src="../assets/Icon_confirmar.svg" alt="confirmar" class="size-8 cursor-pointer" @click="actualizarDato"></span>
-                <span><img src="../assets/Icon_cancelar.svg" alt="confirmar" class="size-8 cursor-pointer" @click="()=>{datosTabla.actualizar=false;datosTabla.dinamica=false}"></span>
             </article>
         </form>
     </div>
@@ -58,8 +58,8 @@ const Api = useApiContext() // Manejar peticiones a la API de manera global
 const datosTabla = useDataContext() // Manejar datos de la tabla
 const alertas = useAlertsContext() // Manejar alertas
 
-const crear = ref(false); // Variables encargada de activar los botones al crear objetos
-const actualizar = ref(false); // Variables encargada de activar los botones al actualizar objetos
+
+// const actualizar = ref(false); // Variables encargada de activar los botones al actualizar objetos
 
 
 
@@ -77,7 +77,7 @@ const enviarDatos = async() => {
         datosTabla.datosForm.marca = '';
         datosTabla.datosForm.surcursal = '';
         datosTabla.datosForm.aspirante = '';
-        crear.value = false; 
+        datosTabla.crear = false; 
     
     }else if(response.data.data === false){
         alertas.alert("Error al guardar los datos","No se pudieron guardar los datos","error")
@@ -97,6 +97,8 @@ const actualizarDato = async(id) => {
         datosTabla.datosForm.surcursal = '';
         datosTabla.datosForm.aspirante = '';
         datosTabla.actualizar = false; // Volver al estado inicial
+        datosTabla.actualizar_eliminar = true; // Volver al estado inicial
+
     }else{
         alertas.alert("Error al actualizar los datos","No se pudieron actualizar los datos","error")
     }

@@ -1,17 +1,17 @@
 <template>
     <div>
         <section>
-            <button @click="clickBoton" :class="`p-2 rounded-xl text-gray-400 border-2 border-[${color}] transition-ease-in-out duration-100 hover:bg-[${color}] hover:text-black`" :type="tipo">{{ mensaje }}</button>
+            <button @click="clickBoton" :class="`p-2 rounded-xl text-gray-400 border-2 border-[${color}] transition-ease-in-out duration-100 hover:text-black`" :type="tipo">{{ mensaje }}</button>
         </section>
     </div>
 </template>
 
 <script setup>
-import { ref, defineEmits, defineProps } from 'vue'
+import { ref } from 'vue'
 
 // Propiedades del boton
 const props = defineProps({
-    mensaje:String,
+    mensaje:String, 
     color:String,
     tipo:String
 })

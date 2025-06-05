@@ -20,11 +20,11 @@
                         <!-- acciones -->
                         <article class="p-2 flex gap-2">
                             <!-- boton de editar -->
-                            <span v-show="actualizar_eliminar"><img src="../assets/Icon_editar.svg" alt="editar" class="size-6" @click="actualizarDato(elemento.id)"></span>
-                            <span v-show="!actualizar_eliminar"><img src="../assets/Icon_editar1.svg" alt="editar" class="size-6" @click="actualizarDato(elemento.id)"></span>
+                            <span v-show="datosTabla.actualizar_eliminar"><img src="../assets/Icon_editar.svg" alt="editar" class="size-6" @click="actualizarDato(elemento.id)"></span>
+                            <span v-show="!datosTabla.actualizar_eliminar"><img src="../assets/Icon_editar1.svg" alt="editar" class="size-6" @click="actualizarDato(elemento.id)"></span>
                             <!-- boton de eliminar -->
-                            <span v-show="!actualizar_eliminar"><img src="../assets/Icon_eliminar1.svg" alt="eliminar" class="size-6" @click="eliminarDato(elemento.id)"></span>
-                            <span v-show="actualizar_eliminar"><img src="../assets/Icon_eliminar.svg" alt="eliminar" class="size-6" @click="eliminarDato(elemento.id)"></span>
+                            <span v-show="!datosTabla.actualizar_eliminar"><img src="../assets/Icon_eliminar1.svg" alt="eliminar" class="size-6" @click="eliminarDato(elemento.id)"></span>
+                            <span v-show="datosTabla.actualizar_eliminar"><img src="../assets/Icon_eliminar.svg" alt="eliminar" class="size-6" @click="eliminarDato(elemento.id)"></span>
                         </article>
 
                     </td>
@@ -44,7 +44,7 @@ const api = useApiContext() // Manejar datos de la API
 
 const datosTabla = useDataContext() // Manejar datos de la tabla
 
-const actualizar_eliminar = ref(false) // Variable para activar el boton de actualizar o eliminar
+
 const alertas = useAlertsContext() // Manejar alertas
 
 
@@ -55,21 +55,21 @@ onMounted(async() => {
 
 // Funcion para actualizar los datos de la tabla
 const actualizarDato = async(id) => {
-    actualizar_eliminar.value = true;
+    datosTabla.actualizar_eliminar = true;
     const actualizar = datosTabla.data.data.find(elemento => elemento.id === id);
     // Asignar los datos a las varialbes de los inputs
     datosTabla.datosForm.id = actualizar.id;
     datosTabla.datosForm.marca = actualizar.marca;
     datosTabla.datosForm.surcursal = actualizar.surcursal;
     datosTabla.datosForm.aspirante = actualizar.aspirante;
-    datosTabla.dinamica = true; // Activar elcolor de los iconos
+    datosTabla.dinamica = true; // Activar el color de los iconos
     datosTabla.actualizar = true; // Activar los botones de actualizar
+    datosTabla.crear = false; // Quitar el estado de crear objeto si va a editar o eliminar objeto
 }
 
 // Funcion para eliminar los datos de la tabla
 const eliminarDato = async(id) => {
     const response = await api.API_CONTEXT('http://localhost:8000/api/concesionario/'+id,'DELETE');
-    console.log(response.delete);
     if(response.delete === true){
         alertas.alert("Datos eliminados","Datos eliminados con exito","success")
         datosTabla.data = await api.API_CONTEXT('http://localhost:8000/api/concesionario/')

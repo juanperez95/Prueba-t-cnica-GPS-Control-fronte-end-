@@ -25,6 +25,13 @@ body{
 .color-link{
   color: #40CEE4;
   cursor: pointer;
+  transform: translateY(0px);
+  transition: all 0.3s ease-in-out;
+}
+
+.color-link:hover{
+  text-shadow: #40CEE4 0px 0px 10px;
+  transform: translateY(-5px);
 }
 
 /* estilos de los inputs */
