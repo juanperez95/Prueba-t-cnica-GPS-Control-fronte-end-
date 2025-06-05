@@ -20,15 +20,18 @@
                         <!-- acciones -->
                         <article class="p-2 flex gap-2">
                             <!-- boton de editar -->
-                            <span v-show="datosTabla.actualizar_eliminar"><img src="../assets/Icon_editar.svg" alt="editar" class="size-6" @click="actualizarDato(elemento.id)"></span>
+                            <span v-show="datosTabla.actualizar_eliminar"><img src="../assets/Icon_editar.svg" alt="editar" class="size-6" ></span>
                             <span v-show="!datosTabla.actualizar_eliminar"><img src="../assets/Icon_editar1.svg" alt="editar" class="size-6" @click="actualizarDato(elemento.id)"></span>
                             <!-- boton de eliminar -->
                             <span v-show="!datosTabla.actualizar_eliminar"><img src="../assets/Icon_eliminar1.svg" alt="eliminar" class="size-6" @click="eliminarDato(elemento.id)"></span>
-                            <span v-show="datosTabla.actualizar_eliminar"><img src="../assets/Icon_eliminar.svg" alt="eliminar" class="size-6" @click="eliminarDato(elemento.id)"></span>
+                            <span v-show="datosTabla.actualizar_eliminar"><img src="../assets/Icon_eliminar.svg" alt="eliminar" class="size-6" ></span>
                         </article>
 
                     </td>
-                </tr>               
+                </tr>    
+                <tr v-if="datosTabla.data.length === 0">
+                    <td colspan="3" class="text-center color_texto mt-5 text-2xl">¡No hay datos disponibles!</td>
+                </tr>           
             </tbody>
         </table>
     </div>
@@ -50,7 +53,7 @@ const alertas = useAlertsContext() // Manejar alertas
 
 // Al renderizar la tabla se llaman los datos de la base de datos
 onMounted(async() => {
-    datosTabla.data = await api.API_CONTEXT('http://localhost:8000/api/concesionario/')
+    datosTabla.data = await api.API_CONTEXT('https://backend-gpscontrol.onrender.com/api/concesionario/')
 })
 
 // Funcion para actualizar los datos de la tabla
@@ -69,10 +72,10 @@ const actualizarDato = async(id) => {
 
 // Funcion para eliminar los datos de la tabla
 const eliminarDato = async(id) => {
-    const response = await api.API_CONTEXT('http://localhost:8000/api/concesionario/'+id,'DELETE');
+    const response = await api.API_CONTEXT('https://backend-gpscontrol.onrender.com/api/concesionario/'+id,'DELETE');
     if(response.delete === true){
         alertas.alert("Datos eliminados","Datos eliminados con exito","success")
-        datosTabla.data = await api.API_CONTEXT('http://localhost:8000/api/concesionario/')
+        datosTabla.data = await api.API_CONTEXT('https://backend-gpscontrol.onrender.com/api/concesionario/')
     }
 }
 

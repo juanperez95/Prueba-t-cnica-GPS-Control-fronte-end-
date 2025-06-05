@@ -1,15 +1,17 @@
 <template>
   <div>
-    <!-- Animacion lateral -->
+    <!-- Animacion de onda -->
     <div class="absolute inset-0">
       <div class="burbuja"></div>
     </div>
-    <article class="p-7 z-8">
-      <!-- Redirigir enlace de logo -->
-      <a href="https://monitoringinnovation.com/" target="_blank">
-        <img src="../assets/Imagologo_motion.svg" alt="logo">
-      </a>
-    </article>
+    <section>
+      <article class="p-7 z-8">
+        <!-- Redirigir enlace de logo -->
+        <a href="https://monitoringinnovation.com/" target="_blank">
+          <img src="../assets/Imagologo_motion.svg" alt="logo">
+        </a>
+      </article>
+    </section>
     <!-- Principal -->
     <section class="p-3 overflow-y-hidden inset-0 z-0">
       <!-- imagen de la esquina superior derecha (minilogo)-->

@@ -3,7 +3,7 @@
     <!-- Formulario para interactuar con la API -->
         <form class="flex flex-col gap-1 p-4 ml-10 border-2 border-[#C5C5C5] rounded-xl shadow-xl" @submit.prevent="enviarDatos">
             <!-- icono de crear -->
-            <span><img src="../assets/Icon_crear.svg" alt="crear" class="size-6" @click="()=>{datosTabla.dinamica=!datosTabla.dinamica;datosTabla.crear=!datosTabla.crear;datosTabla.actualizar=false}"></span>
+            <span><img src="../assets/Icon_crear.svg" alt="crear" class="size-6" @click="()=>{datosTabla.dinamica=true;datosTabla.crear=!datosTabla.crear;datosTabla.actualizar=false}"></span>
             <!-- campos de entrada -->
             <article class="p-5 flex gap-5 flex-row">
                 <span>
@@ -31,7 +31,7 @@
             <!-- boton de crear cuando se pulsa el icono de + -->
             <article class="flex flex-row gap-5 justify-center items-center" v-show="datosTabla.crear">
                 <!-- aldar click en el boton de cancelar se ocultan los botones -->
-                <Boton mensaje="Cancelar" color="#E280BE" tipo="button" @funcion_btn="()=>{datosTabla.dinamica=!datosTabla.dinamica;datosTabla.crear=!datosTabla.crear}"/>
+                <Boton mensaje="Cancelar" color="#E280BE" tipo="button" @funcion_btn="()=>{datosTabla.dinamica=!datosTabla.dinamica;datosTabla.crear=!datosTabla.crear;datosTabla.actualizar_eliminar=false}"/>
                 <Boton mensaje="Crear" color="#00249C" tipo="submit"/>
             </article>
 
@@ -62,16 +62,15 @@ const alertas = useAlertsContext() // Manejar alertas
 // const actualizar = ref(false); // Variables encargada de activar los botones al actualizar objetos
 
 
-
 // Funcion para enviar los datos al backend
 const enviarDatos = async() => {
-    let response = await Api.API_CONTEXT('http://localhost:8000/api/concesionario/','POST',datosTabla.datosForm);
+    let response = await Api.API_CONTEXT('https://backend-gpscontrol.onrender.com/api/concesionario/','POST',datosTabla.datosForm);
     // Validar la respuesta del servidor 
     if(response.data === true){
         // mostrar alerta
         alertas.alert("Datos guardados","Datos guardados con exito","success")
         // Volver a llamar a la API para actualizar los datos
-        datosTabla.data = await Api.API_CONTEXT('http://localhost:8000/api/concesionario/')
+        datosTabla.data = await Api.API_CONTEXT('https://backend-gpscontrol.onrender.com/api/concesionario/')
         datosTabla.dinamica = false;
         // limpiar datos
         datosTabla.datosForm.marca = '';
@@ -86,18 +85,18 @@ const enviarDatos = async() => {
 
 // Funcion para actualizar los datos de base de datos
 const actualizarDato = async(id) => {
-    let response = await Api.API_CONTEXT('http://localhost:8000/api/concesionario/'+datosTabla.datosForm.id,'PUT',datosTabla.datosForm);
+    let response = await Api.API_CONTEXT('https://backend-gpscontrol.onrender.com/api/concesionario/'+datosTabla.datosForm.id,'PUT',datosTabla.datosForm);
     // mostrar alerta de que se actualizaron los datos
     if(response.update === true){
         alertas.alert("Datos actualizados","Datos actualizados con exito","success")
-        datosTabla.data = await Api.API_CONTEXT('http://localhost:8000/api/concesionario/')
+        datosTabla.data = await Api.API_CONTEXT('https://backend-gpscontrol.onrender.com/api/concesionario/')
         datosTabla.dinamica = false;
         // limpiar datos
         datosTabla.datosForm.marca = '';
         datosTabla.datosForm.surcursal = '';
         datosTabla.datosForm.aspirante = '';
         datosTabla.actualizar = false; // Volver al estado inicial
-        datosTabla.actualizar_eliminar = true; // Volver al estado inicial
+        datosTabla.actualizar_eliminar = false; // Volver al estado inicial
 
     }else{
         alertas.alert("Error al actualizar los datos","No se pudieron actualizar los datos","error")
