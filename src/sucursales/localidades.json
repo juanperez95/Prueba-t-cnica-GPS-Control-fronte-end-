@@ -1,0 +1,104 @@
+{
+  "localidades": [
+    {
+      "id": 1,
+      "nombre": "Usaquén",
+      "codigo": "01"
+    },
+    {
+      "id": 2,
+      "nombre": "Chapinero",
+      "codigo": "02"
+    },
+    {
+      "id": 3,
+      "nombre": "Santa Fe",
+      "codigo": "03"
+    },
+    {
+      "id": 4,
+      "nombre": "San Cristóbal",
+      "codigo": "04"
+    },
+    {
+      "id": 5,
+      "nombre": "Usme",
+      "codigo": "05"
+    },
+    {
+      "id": 6,
+      "nombre": "Tunjuelito",
+      "codigo": "06"
+    },
+    {
+      "id": 7,
+      "nombre": "Bosa",
+      "codigo": "07"
+    },
+    {
+      "id": 8,
+      "nombre": "Kennedy",
+      "codigo": "08"
+    },
+    {
+      "id": 9,
+      "nombre": "Fontibón",
+      "codigo": "09"
+    },
+    {
+      "id": 10,
+      "nombre": "Engativá",
+      "codigo": "10"
+    },
+    {
+      "id": 11,
+      "nombre": "Suba",
+      "codigo": "11"
+    },
+    {
+      "id": 12,
+      "nombre": "Barrios Unidos",
+      "codigo": "12"
+    },
+    {
+      "id": 13,
+      "nombre": "Teusaquillo",
+      "codigo": "13"
+    },
+    {
+      "id": 14,
+      "nombre": "Los Mártires",
+      "codigo": "14"
+    },
+    {
+      "id": 15,
+      "nombre": "Antonio Nariño",
+      "codigo": "15"
+    },
+    {
+      "id": 16,
+      "nombre": "Puente Aranda",
+      "codigo": "16"
+    },
+    {
+      "id": 17,
+      "nombre": "La Candelaria",
+      "codigo": "17"
+    },
+    {
+      "id": 18,
+      "nombre": "Rafael Uribe Uribe",
+      "codigo": "18"
+    },
+    {
+      "id": 19,
+      "nombre": "Ciudad Bolívar",
+      "codigo": "19"
+    },
+    {
+      "id": 20,
+      "nombre": "Sumapaz",
+      "codigo": "20"
+    }
+  ]
+}

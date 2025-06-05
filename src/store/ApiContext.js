@@ -18,11 +18,12 @@ export const useApiContext = defineStore('api',()=>{
         }).catch(error => {
             console.log(error) // Mostrar error
         })
+        
+        return datos.value
     }
 
     return {
         API_CONTEXT, // Funcion para realizar peticiones a la API
-        datos, // Datos de la API
     }
 
 });
